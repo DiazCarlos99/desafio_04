@@ -1,4 +1,4 @@
-from function import mostrar_menu, mostrar_inmuebles, editar_inmueble, buscar_inmuebles_por_presupuesto, cambiar_estado, eliminar_inmueble, agregar_inmueble
+from function import mostrar_menu, mostrar_inmuebles, editar_inmueble, buscar_inmuebles_por_presupuesto, cambiar_estado, agregar_inmueble, eliminar_inmueble
 
 
 inmuebles = [{'año': 2010, 'metros': 150, 'habitaciones': 4, 'garaje': True, 'zona': 'C', 'estado': 'Disponible'},
@@ -12,24 +12,26 @@ inmuebles = [{'año': 2010, 'metros': 150, 'habitaciones': 4, 'garaje': True, 'z
 
 while True:
     mostrar_menu()
-    opcion = input('Ingrese un opción: ')
-    if not opcion:
-        print(f'Ingrese una opción numerica valida')
+    opcion = input('Ingrese una opción: ')
+    if not opcion.isdigit():
+        print('Ingrese una opción numérica válida')
         continue
 
-    if opcion == '1':
+    opcion = int(opcion)
+
+    if opcion == 1:
         mostrar_inmuebles(inmuebles)
-    elif opcion == '2':
+    if opcion == 2:
         agregar_inmueble(inmuebles)
-    elif opcion == '3':
+    elif opcion == 3:
         editar_inmueble(inmuebles)
-    elif opcion == '4':
+    elif opcion == 4:
         eliminar_inmueble(inmuebles)
-    elif opcion == '5':
+    elif opcion == 5:
         cambiar_estado(inmuebles)
-    elif opcion == '6':
+    elif opcion == 6:
         buscar_inmuebles_por_presupuesto(inmuebles)
-    elif opcion == '7':
+    elif opcion == 7:
         break
     else:
         print("Opción inválida. Intente nuevamente.")
