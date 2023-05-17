@@ -1,37 +1,30 @@
-from function import mostrar_menu, mostrar_inmuebles, editar_inmueble, buscar_inmuebles_por_presupuesto, cambiar_estado, agregar_inmueble, eliminar_inmueble
+from function import mostrar_menu, mostrar_inmuebles, agregar_inmuebles, editar_inmuebles, eliminar_inmueble, cambiar_estado, inmueble_presupuesto
+from inmuebles import inmuebles
 
-
-inmuebles = [{'año': 2010, 'metros': 150, 'habitaciones': 4, 'garaje': True, 'zona': 'C', 'estado': 'Disponible'},
-             {'año': 2016, 'metros': 80, 'habitaciones': 2,
-                 'garaje': False, 'zona': 'B', 'estado': 'Reservado'},
-             {'año': 2000, 'metros': 180, 'habitaciones': 4,
-                 'garaje': True, 'zona': 'A', 'estado': 'Disponible'},
-             {'año': 2015, 'metros': 95, 'habitaciones': 3,
-                 'garaje': True, 'zona': 'B', 'estado': 'Vendido'},
-             {'año': 2008, 'metros': 60, 'habitaciones': 2, 'garaje': False, 'zona': 'C', 'estado': 'Disponible'}]
 
 while True:
     mostrar_menu()
-    opcion = input('Ingrese una opción: ')
-    if not opcion.isdigit():
-        print('Ingrese una opción numérica válida')
-        continue
+    opcion = input('Ingrese una opcion: ')
 
-    opcion = int(opcion)
+    if not opcion:
+        print('Ingrese una opción numerica válida')
 
-    if opcion == 1:
+    if opcion == '1':
+        print('***** lista de Inmuebles *****')
         mostrar_inmuebles(inmuebles)
-    if opcion == 2:
-        agregar_inmueble(inmuebles)
-    elif opcion == 3:
-        editar_inmueble(inmuebles)
-    elif opcion == 4:
+    elif opcion == '2':
+        agregar_inmuebles(inmuebles)
+    elif opcion == '3':
+        print('***** Editar Inmuebles *****')
+        editar_inmuebles(inmuebles)
+    elif opcion == '4':
+        print('***** Eliminar Inmuebles *****')
         eliminar_inmueble(inmuebles)
-    elif opcion == 5:
+    elif opcion == '5':
+        print('***** Cambiar estado del inmueble *****')
         cambiar_estado(inmuebles)
-    elif opcion == 6:
-        buscar_inmuebles_por_presupuesto(inmuebles)
-    elif opcion == 7:
+    elif opcion == '6':
+        print('***** Cambiar estado del inmueble *****')
+        inmueble_presupuesto(inmuebles)
+    elif opcion == '7':
         break
-    else:
-        print("Opción inválida. Intente nuevamente.")
