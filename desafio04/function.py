@@ -10,11 +10,12 @@ def mostrar_menu():
     print("7- Salir")
     print("-----------------------------")
 
-
 def mostrar_inmuebles(lista, precio=False):
+    print('\n*******************************')
+    print('***** Listado de inmuebles *****')
+    print('********************************')
     i = 1
     for inmueble in lista:
-        print('***** Listado de inmuebles *****')
         print(f'inmueble {i}: ')
         print('Año:', inmueble['año'])
         print('Metros:', inmueble['metros'])
@@ -27,7 +28,6 @@ def mostrar_inmuebles(lista, precio=False):
         print('***********************')
         i += 1
 
-
 def validar_inmueble(inmueble):
     if (
         inmueble['año'] < 2000
@@ -39,9 +39,10 @@ def validar_inmueble(inmueble):
         return False
     return True
 
-
 def agregar_inmuebles(lista):
-    print(f'***** Agregar Inmueble *****')
+    print('\n****************************')
+    print('***** Agregar inmueble *****')
+    print('****************************')
     nuevo_inmueble = {
         'año': int(input('Año: ')),
         'metros': int(input('Metros: ')),
@@ -52,11 +53,9 @@ def agregar_inmuebles(lista):
     }
     if validar_inmueble(nuevo_inmueble):
         lista.append(nuevo_inmueble)
-        print('Inmueble agregado correctamente')
-        mostrar_inmuebles(lista)
+        print('***** Inmueble agregado correctamente *****')
     else:
         print('No se pudo agregar el inmueble. Por favor verifique los datos ingresados')
-
 
 def editar_inmuebles(lista):
     mostrar_inmuebles(lista)
@@ -77,17 +76,13 @@ def editar_inmuebles(lista):
         if validar_inmueble(inmueble):
             lista.append(inmueble)
             print('\n**************************************************')
-            print('********* Inmueble agregado correctamente *********')
+            print('********* Inmueble agregado correctamente ********')
             print('**************************************************')
-            mostrar_inmuebles(lista)
         else:
-            print('\n**************************************************')
             print(
                 'No se pudo agregar el inmueble. Por favor verifique los datos ingresados')
-            print('**************************************************')
     else:
         print('Ha ingresado un indice no valido')
-
 
 def eliminar_inmueble(lista):
     mostrar_inmuebles(lista)
@@ -100,11 +95,12 @@ def eliminar_inmueble(lista):
     confirmacion = input('s/n: ')
     if confirmacion == 's':
         lista.pop(indice)
-        print('El inmueble se ha eliminado correctamente')
+        print('\n****************************************************')
+        print('***** El inmueble se ha eliminado correctamente *****')
+        print('*****************************************************')
         mostrar_inmuebles(lista)
     else:
         print(f'No se ha eliminado el inmueble {lista[indice]}')
-
 
 def cambiar_estado(lista):
     mostrar_inmuebles(lista)
@@ -116,26 +112,27 @@ def cambiar_estado(lista):
     print(f'Ha seleccionado el inmueble: {lista[indice]}')
     lista[indice]['estado'] = input('Estado (Disponible/Reservado/Vendido: ')
     if validar_inmueble(lista[indice]):
-        print('Se ha actualizado el estado correctamente')
-        mostrar_inmuebles(lista[indice])
+        print('\n****************************************')
+        print('***** Se ha actualizado el estado correctamente *****')
+        print('*****************************************')
     else:
         print('No se ha actualizado el estado. Verifique los datos ingresados')
 
-
 def inmueble_presupuesto(lista):
+    print('\n*****************************************')
+    print('***** Inmuebles Segun su presupuesto *****')
+    print('******************************************')
     presupuesto = float(input('Ingrese el presupuesto máximo: '))
     inmuebles_segun_presupuesto = []
 
     for inmueble in lista:
         precio = calcular_precio(inmueble)
-        if precio <= presupuesto and inmueble['estado'] in ['Reservado', 'Disponible', 'Vendido']:
+        if precio <= presupuesto and inmueble['estado'] in ['Reservado', 'Disponible']:
             inmueble_precio = inmueble.copy()
             inmueble_precio['precio'] = precio
             inmuebles_segun_presupuesto.append(inmueble_precio)
-
     mostrar_inmuebles(inmuebles_segun_presupuesto, True)
     return inmuebles_segun_presupuesto
-
 
 def calcular_precio(inmueble):
     zona = inmueble['zona']
@@ -143,7 +140,6 @@ def calcular_precio(inmueble):
     habitaciones = inmueble['habitaciones']
     garaje = inmueble['garaje']
     antiguedad = 2023 - inmueble['año']
-
     if zona == 'A':
         precio = (metros * 100 + habitaciones * 500 +
                   garaje * 1500) * (1 - antiguedad / 100)
@@ -153,5 +149,4 @@ def calcular_precio(inmueble):
     elif zona == 'C':
         precio = (metros * 100 + habitaciones * 500 +
                   garaje * 1500) * (1 - antiguedad / 100) * 2
-
     return precio

@@ -6,8 +6,6 @@ while True:
     mostrar_menu()
     opcion = input('Ingrese una opcion: ')
 
-    if not opcion:
-        print('Ingrese una opción numerica válida')
 
     if opcion == '1':
         print('***** lista de Inmuebles *****')
@@ -24,7 +22,9 @@ while True:
         print('***** Cambiar estado del inmueble *****')
         cambiar_estado(inmuebles)
     elif opcion == '6':
-        print('***** Cambiar estado del inmueble *****')
+        print('***** Inmuebles Segun su presupuesto *****')
         inmueble_presupuesto(inmuebles)
     elif opcion == '7':
         break
+    else:
+        print('\n***** Ingrese una opción numerica válida *****')
