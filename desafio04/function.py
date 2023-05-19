@@ -28,6 +28,16 @@ def mostrar_inmuebles(lista, precio=False):
         print('***********************')
         i += 1
 
+def mostrar(inmuebles, i):
+    inmueble = inmuebles[i]
+    print(f'inmueble {i}: ')
+    print('Año:', inmueble['año'])
+    print('Metros:', inmueble['metros'])
+    print('Habitaciones: ', inmueble['habitaciones'])
+    print('Garaje:', 'Sí' if inmueble['garaje'] else 'No')
+    print('Zona:', inmueble['zona'])
+    print('Estado:', inmueble['estado'])
+
 def validar_inmueble(inmueble):
     if (
         inmueble['año'] < 2000
@@ -53,7 +63,9 @@ def agregar_inmuebles(lista):
     }
     if validar_inmueble(nuevo_inmueble):
         lista.append(nuevo_inmueble)
+        print('\n***********************************************')
         print('***** Inmueble agregado correctamente *****')
+        print('\n*****************************************')
     else:
         print('No se pudo agregar el inmueble. Por favor verifique los datos ingresados')
 
@@ -74,7 +86,7 @@ def editar_inmuebles(lista):
         inmueble['zona'] = input('Zona (A/B/C): ').upper()
         inmueble['estado'] = input('Estado (Disponible/Reservado/Vendido): ')
         if validar_inmueble(inmueble):
-            lista.append(inmueble)
+            lista[indice - 1] = inmueble
             print('\n**************************************************')
             print('********* Inmueble agregado correctamente ********')
             print('**************************************************')
@@ -91,16 +103,15 @@ def eliminar_inmueble(lista):
     print('**************************************************')
     indice = int(input('Indice: '))
     indice = indice - 1
-    print(f'Esta segurdo de eliminar el inmuble {lista[indice]}')
+    print(f'Esta segurdo de eliminar el inmuble {mostrar(lista,indice)}')
     confirmacion = input('s/n: ')
     if confirmacion == 's':
         lista.pop(indice)
         print('\n****************************************************')
         print('***** El inmueble se ha eliminado correctamente *****')
         print('*****************************************************')
-        mostrar_inmuebles(lista)
     else:
-        print(f'No se ha eliminado el inmueble {lista[indice]}')
+        print(f'No se ha eliminado el inmueble {mostrar(lista, indice)}')
 
 def cambiar_estado(lista):
     mostrar_inmuebles(lista)
@@ -109,9 +120,9 @@ def cambiar_estado(lista):
     print('**************************************************')
     indice = int(input('Indice: '))
     indice = indice - 1
-    print(f'Ha seleccionado el inmueble: {lista[indice]}')
+    print(f'Ha seleccionado el inmueble: {mostrar(lista, indice)}')
     lista[indice]['estado'] = input('Estado (Disponible/Reservado/Vendido: ')
-    if validar_inmueble(lista[indice]):
+    if validar_inmueble(mostrar(lista, indice)):
         print('\n****************************************')
         print('***** Se ha actualizado el estado correctamente *****')
         print('*****************************************')
